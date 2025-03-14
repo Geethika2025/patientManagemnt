@@ -30,6 +30,7 @@ import {
   PatientFormDefaultValues,
 } from "@/constants";
 import Image from "next/image"
+import FileUploader from "../FileUploader"
 
 
 const RegisterForm =({user}:{user:User}) => {
@@ -295,13 +296,22 @@ const RegisterForm =({user}:{user:User}) => {
                 <CustomFormField 
                   fieldType={FormFieldType.INPUT}
                   control={form.control}
-                  name="name"
-                  label="Full Name"
-                  placeholder="John Doe"
-                  iconSrc="/assets/icons/user.svg"
-                  iconAlt="user"
+                  name="identificationNumber"
+                  label="Identification NUmber"
+                  placeholder="123456789"
+                 
                   />
-
+                   <CustomFormField
+              fieldType={FormFieldType.SKELETON}
+              control={form.control}
+              name="identificationDocument"
+              label="SCanned Copy of identification document"
+              renderSkeleton={(field) => (
+               <FormControl>
+                <FileUploader></FileUploader>
+               </FormControl>
+              )}
+            />
       
         {/* <Button type="submit">Submit</Button> */}
         <SubmitButton
