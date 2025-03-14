@@ -1,13 +1,15 @@
-import PatientForm from "@/components/forms/PatientForm";
-import { Button } from "@/components/ui/button";
-import  Image from "next/image";
+import RegisterForm from '@/components/forms/RegisterForm';
+import { getUser } from '@/lib/actions/patient.actions';
+import Image from 'next/image'
 import Link from "next/link";
 
 
-export default function Home() {
+const Register = async({params:{userId}}: SearchParamProps) => {
+    const user =await getUser(userId);
   return (
-  <div className="flex h-screen max-h-screen">
-   {/* Todo:otp verification passkeyMOdal */}
+    
+    <div className="flex h-screen max-h-screen">
+  
    
       <div className="w-full h-full my-auto flex flex-col items-center justify-center gap-10 ">
         <Image
@@ -18,7 +20,9 @@ export default function Home() {
         className="mb-12 h-10 w-fit" 
         
         />
-        <PatientForm/>
+
+        <RegisterForm user={user}/>
+    
         <div className="flex w-[50%]  justify-around ">
         <p className=" text-sm ">
         All rights reserved &#xA9; 2024 MyCompany.
@@ -32,12 +36,14 @@ export default function Home() {
       </div>
     
     <Image
-    src="/assets/images/onboarding-img.png"
+    src="/assets/images/register-img.png"
     height={1000}
         width={1000}
         alt="patient"
         className="max-w-[50%] hidden h-full object-cover md:block"
     />
   </div>
-  );
+  )
 }
+
+export default Register
